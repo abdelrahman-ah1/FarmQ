@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmQ — Soil &amp; Yield Optimization for Egyptian Farms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script>
+        var theme = localStorage.getItem('theme');
+        if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+</head>
+<body class="app-body">
+    <div id="connectivity-banner" class="connectivity-banner connectivity-online" hidden
+         data-online="Back online"
+         data-offline="You are offline — upload and save when connected"
+         data-slow="Slow connection — uploads may take longer"></div>
+    <header class="site-header">
+    <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="brand-wordmark">FarmQ</span>
+        </a>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="site-nav" aria-label="Primary">
+            <a href="#how-it-works">How it works</a>
+            <a href="#plans">Plans</a>
+            <a href="#payments">Payments</a>
+            <a href="#credibility">Data sources</a>
+        </nav>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="ar.html" class="lang-toggle">العربية</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-ghost" target="_blank" rel="noopener">Log in</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary" target="_blank" rel="noopener">Sign Up Free</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">FarmQ</p>
+                <h1>Soil &amp; Yield Optimization System</h1>
+                <p class="lead">Egypt-calibrated fertilization plans from your soil data — free tier works offline via CSV upload.</p>
+                <div class="hero-cta">
+                    <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Sign Up Free</a>
+                    <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Request Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <span class="hero-card-label">Free</span>
+                    <strong>0 EGP</strong>
+                    <p>Upload soil data → Receive your blueprint</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2>How it works</h2>
+            <div class="steps-grid">
+                                <article class="step-card">
+                    <span class="step-num">1</span>
+                    <h3>Upload soil data</h3>
+                    <p>Export lab results (NPK, pH, salinity) as CSV and upload when you reach connectivity.</p>
+                </article>
+                                <article class="step-card">
+                    <span class="step-num">2</span>
+                    <h3>Select your crop</h3>
+                    <p>Choose from Egypt-calibrated crops: cotton, wheat, citrus, rice, sugarcane, and more.</p>
+                </article>
+                                <article class="step-card">
+                    <span class="step-num">3</span>
+                    <h3>Receive your blueprint</h3>
+                    <p>Get an elemental fertilization schedule aligned with ARC/SWERI soil thresholds.</p>
+                </article>
+                            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="section section-alt">
+        <div class="container">
+            <h2>Plans &amp; pricing</h2>
+            <div class="plan-prices">
+                <div class="plan-price-card">
+                    <h3>Free</h3>
+                    <p class="price">0 EGP</p>
+                </div>
+                <div class="plan-price-card plan-price-card--paid">
+                    <h3>Paid</h3>
+                    <p class="price">From ~450 EGP / season per farm polygon</p>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table class="plan-table">
+                    <thead>
+                        <tr>
+                            <th>Plans &amp; pricing</th>
+                            <th>Free</th>
+                            <th>Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                                <tr>
+                            <td>Manual soil CSV upload</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Crop selection (Egypt-calibrated)</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Fertilization blueprint (soil-only)</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Sentinel-2 satellite imagery</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>NDVI/NDRE analysis</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Geospatial deficiency mapping</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Microclimate (7-day) forecast</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Irrigation &amp; water optimization</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Automated threat alerts</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>Multi-farm portfolio (Agronomist)</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                            </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="payments" class="section">
+        <div class="container">
+            <h2>Pay the way Egypt pays</h2>
+            <p class="section-intro">All checkout flows settle in EGP through CBE-regulated payment providers.</p>
+            <div class="rails-grid">
+                                <article class="rail-card">
+                    <h3>Fawry</h3>
+                    <p>Cash acceptance nationwide — ideal for unbanked operators</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>Vodafone Cash</h3>
+                    <p>Mobile wallet with strong rural reach</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>Meeza</h3>
+                    <p>CBE-backed national debit &amp; prepaid cards</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>InstaPay</h3>
+                    <p>Real-time transfers for agronomist accounts</p>
+                </article>
+                            </div>
+        </div>
+    </section>
+
+    <section id="credibility" class="section section-alt">
+        <div class="container narrow">
+            <h2>Built on Egyptian soil science</h2>
+            <p>Crop baselines and soil interpretation thresholds reference published guidance from the Agricultural Research Center (ARC) and SWERI under MALR. Satellite indices follow methodologies consistent with NARSS land-suitability mapping. FarmQ does not claim direct integration with these bodies.</p>
+            <div class="ref-badges">
+                <span>MALR / ARC / SWERI</span>
+                <span>NARSS</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div>
+            <strong>FarmQ</strong>
+            <p>LogiQ Studio</p>
+        </div>
+        <div>
+            <p>Support: Sun–Thu, 9:00–17:00 Cairo time</p>
+            <p><a href="mailto:support@farmq.eg">support@farmq.eg</a></p>
+        </div>
+        <div class="footer-cta">
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary" target="_blank" rel="noopener">Sign Up Free</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-secondary" target="_blank" rel="noopener">Request Demo</a>
+        </div>
+    </div>
+    <p class="footer-copy">© 2026 FarmQ. All rights reserved. | Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
+</footer>
+    <script src="assets/js/app.js" defer></script>
+</body>
+</html>

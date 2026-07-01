@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmQ — تحليل التربة وتحسين الإنتاجية للمزارع المصرية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script>
+        var theme = localStorage.getItem('theme');
+        if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+</head>
+<body class="app-body">
+    <div id="connectivity-banner" class="connectivity-banner connectivity-online" hidden
+         data-online="عدت متصلاً"
+         data-offline="أنت غير متصل — ارفع واحفظ عند توفر الشبكة"
+         data-slow="اتصال بطيء — قد يستغرق الرفع وقتاً أطول"></div>
+    <header class="site-header">
+    <div class="container header-inner">
+        <a href="ar.html" class="brand">
+            <span class="brand-wordmark">FarmQ</span>
+        </a>
+        <button type="button" class="nav-toggle" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="site-nav" aria-label="Primary">
+            <a href="#how-it-works">كيف يعمل</a>
+            <a href="#plans">الباقات</a>
+            <a href="#payments">الدفع</a>
+            <a href="#credibility">مصادر البيانات</a>
+        </nav>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+            <a href="index.html" class="lang-toggle">English</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-ghost" target="_blank" rel="noopener">تسجيل الدخول</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary" target="_blank" rel="noopener">اشترك مجاناً</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">FarmQ</p>
+                <h1>نظام تحليل التربة وتحسين الإنتاجية الزراعية</h1>
+                <p class="lead">خطط تسميد مخصصة للسوق المصري من بيانات تربتك — الباقة المجانية تعمل دون اتصال عبر رفع CSV.</p>
+                <div class="hero-cta">
+                    <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary btn-lg" target="_blank" rel="noopener">اشترك مجاناً</a>
+                    <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">اطلب عرضاً</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <span class="hero-card-label">مجاني</span>
+                    <strong>٠ جنيه</strong>
+                    <p>ارفع بيانات التربة → احصل على خطتك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2>كيف يعمل</h2>
+            <div class="steps-grid">
+                                <article class="step-card">
+                    <span class="step-num">1</span>
+                    <h3>ارفع بيانات التربة</h3>
+                    <p>صدّر نتائج المختبر (NPK، pH، الملوحة) كملف CSV وارفعه عند توفر الاتصال.</p>
+                </article>
+                                <article class="step-card">
+                    <span class="step-num">2</span>
+                    <h3>اختر محصولك</h3>
+                    <p>اختر من محاصيل مصر: قطن، قمح، حمضيات، أرز، قصب سكر، وغيرها.</p>
+                </article>
+                                <article class="step-card">
+                    <span class="step-num">3</span>
+                    <h3>احصل على خطتك</h3>
+                    <p>جدول تسميد عنصري متوافق مع عتبات ARC/SWERI للتربة.</p>
+                </article>
+                            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="section section-alt">
+        <div class="container">
+            <h2>الباقات والأسعار</h2>
+            <div class="plan-prices">
+                <div class="plan-price-card">
+                    <h3>مجاني</h3>
+                    <p class="price">٠ جنيه</p>
+                </div>
+                <div class="plan-price-card plan-price-card--paid">
+                    <h3>مدفوع</h3>
+                    <p class="price">من ~٤٥٠ جنيه / موسم لكل مضلع مزرعة</p>
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table class="plan-table">
+                    <thead>
+                        <tr>
+                            <th>الباقات والأسعار</th>
+                            <th>مجاني</th>
+                            <th>مدفوع</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                                <tr>
+                            <td>رفع CSV يدوي لعينات التربة</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>محرك اختيار المحصول (مصر)</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>خطة التسميد (التربة فقط)</td>
+                            <td>✓</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>صور Sentinel-2 الفضائية</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>تحليل NDVI/NDRE</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>خرائط نقص التسميد</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>توقعات المناخ (٧ أيام)</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>تحسين الري والمياه</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>تنبيهات التهديدات الآلية</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                                <tr>
+                            <td>محفظة مزارع متعددة (مهندس)</td>
+                            <td>—</td>
+                            <td>✓</td>
+                        </tr>
+                                            </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="payments" class="section">
+        <div class="container">
+            <h2>ادفع بالطريقة المصرية</h2>
+            <p class="section-intro">جميع عمليات الدفع بالجنيه المصري عبر مزودين مرخصين من البنك المركزي.</p>
+            <div class="rails-grid">
+                                <article class="rail-card">
+                    <h3>فوري</h3>
+                    <p>قبول نقدي على مستوى الجمهورية — مثالي للمزارعين غير المتعاملين مع البنوك</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>فودافون كاش</h3>
+                    <p>محفظة جوال بانتشار واسع في الريف والدلتا</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>ميزة</h3>
+                    <p>بطاقات الخصم والمدفوعة مسبقاً الوطنية</p>
+                </article>
+                                <article class="rail-card">
+                    <h3>InstaPay</h3>
+                    <p>تحويلات فورية لحسابات المهندسين الزراعيين</p>
+                </article>
+                            </div>
+        </div>
+    </section>
+
+    <section id="credibility" class="section section-alt">
+        <div class="container narrow">
+            <h2>مبني على علوم التربة المصرية</h2>
+            <p>تستند مصفوفات المحاصيل وعتبات تفسير التربة إلى إرشادات ARC وSWERI التابعة لوزارة الزراعة. ومؤشرات الأقمار الصناعية تتبع منهجيات متسقة مع NARSS. FarmQ لا يدّعي تكاملاً مباشراً مع هذه الجهات.</p>
+            <div class="ref-badges">
+                <span>MALR / ARC / SWERI</span>
+                <span>NARSS</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <div>
+            <strong>FarmQ</strong>
+            <p>LogiQ Studio</p>
+        </div>
+        <div>
+            <p>الدعم: الأحد–الخميس، ٩:٠٠–١٧:٠٠ بتوقيت القاهرة</p>
+            <p><a href="mailto:support@farmq.eg">support@farmq.eg</a></p>
+        </div>
+        <div class="footer-cta">
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-primary" target="_blank" rel="noopener">اشترك مجاناً</a>
+            <a href="https://github.com/abdelrahman-ah1/FarmQ" class="btn btn-secondary" target="_blank" rel="noopener">اطلب عرضاً</a>
+        </div>
+    </div>
+    <p class="footer-copy">© 2026 FarmQ. جميع الحقوق محفوظة. | Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
+</footer>
+    <script src="assets/js/app.js" defer></script>
+</body>
+</html>
