@@ -45,7 +45,12 @@ final class IrrigationController
         $alertList = $this->alerts->evaluate(
             $forecast['days'] ?? [],
             $this->samples->latestForFarm((int) $activeFarm['id']),
-            (string) ($cropCode ?? '')
+            [
+                'crop_code' => (string) ($cropCode ?? ''),
+                'region' => (string) $activeFarm['region'],
+                'governorate' => (string) ($activeFarm['governorate'] ?? ''),
+                'schedule' => $schedule,
+            ]
         );
 
         return view('irrigation/index', app_view_data($this->t, $user, [
@@ -62,7 +67,7 @@ final class IrrigationController
     {
         verify_csrf();
         $user = $this->auth->requireAuth();
-        $activeFarm = $this->requireActiveFarm($user);
+        $activeFarm = $this->farmContext->requireActiveEditable($user, $this->t);
         $tierGate = new TierGate($activeFarm);
 
         if (!$tierGate->can('irrigation')) {

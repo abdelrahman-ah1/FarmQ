@@ -6,8 +6,16 @@
     <title><?= htmlspecialchars($pageTitle ?? $t->get('meta.title')) ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
+    <script>
+        var theme = localStorage.getItem('theme');
+        if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
 </head>
 <body class="app-body">
     <div id="connectivity-banner" class="connectivity-banner connectivity-online" hidden

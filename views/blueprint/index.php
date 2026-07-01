@@ -32,6 +32,7 @@ ob_start();
         <?php else: ?>
 
         <?php if ($isStale || !$planRow): ?>
+        <?php if ($canEdit ?? true): ?>
         <div class="dashboard-card">
             <p class="muted"><?= htmlspecialchars($t->get($planRow ? 'blueprint.stale_hint' : 'blueprint.generate_hint')) ?></p>
             <form method="post" action="/blueprint/generate?lang=<?= $t->locale() ?>">
@@ -39,6 +40,7 @@ ob_start();
                 <button type="submit" class="btn btn-primary"><?= htmlspecialchars($t->get('blueprint.generate_btn')) ?></button>
             </form>
         </div>
+        <?php endif; ?>
         <?php endif; ?>
 
         <?php if ($planRow && $plan): ?>
@@ -131,7 +133,7 @@ ob_start();
             </div>
         </div>
 
-        <?php if ($isStale): ?>
+        <?php if ($isStale && ($canEdit ?? true)): ?>
         <form method="post" action="/blueprint/generate?lang=<?= $t->locale() ?>" style="margin-top: 1rem;">
             <?= csrf_field() ?>
             <button type="submit" class="btn btn-secondary"><?= htmlspecialchars($t->get('blueprint.regenerate_btn')) ?></button>

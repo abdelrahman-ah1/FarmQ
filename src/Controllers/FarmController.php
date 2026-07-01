@@ -132,6 +132,24 @@ final class FarmController
         redirect($referer);
     }
 
+    public function invite(): never
+    {
+        verify_csrf();
+        $user = $this->auth->requireAuth();
+        $farmId = (int) ($_POST['farm_id'] ?? 0);
+        $role = trim((string) ($_POST['access_role'] ?? 'viewer'));
+
+        $invite = (new \FarmQ\Services\FarmInviteService())->createForFarm($farmId, (int) $user['id'], $role);
+        if (!$invite['ok']) {
+            flash('invite_error', $invite['error'] ?? 'failed');
+            redirect('/farms?lang=' . $this->t->locale());
+        }
+
+        flash('invite_url', $invite['url'] ?? '');
+        flash('success', $this->t->get('farms.invite_created'));
+        redirect('/farms?lang=' . $this->t->locale());
+    }
+
     /** @param array<string, mixed> $user */
     private function requireOwnedActiveFarm(array $user): array
     {

@@ -34,10 +34,12 @@ final class IngestionController
     {
         $user = $this->auth->requireAuth();
         $activeFarm = $this->requireActiveFarm($user);
+        $canEdit = (new \FarmQ\Services\FarmAccessService())->canEdit((int) $activeFarm['id'], (int) $user['id']);
 
         return view('ingestion/index', app_view_data($this->t, $user, [
             'pageTitle' => $this->t->get('ingestion.title'),
             'activeFarm' => $activeFarm,
+            'canEdit' => $canEdit,
             'availableCrops' => $this->crops->availableForFarm($activeFarm),
             'selectedCrop' => $this->crops->selectedCrop($activeFarm, $this->t->locale()),
             'latestSample' => $this->samples->latestForFarm((int) $activeFarm['id']),
@@ -52,7 +54,7 @@ final class IngestionController
     {
         verify_csrf();
         $user = $this->auth->requireAuth();
-        $activeFarm = $this->requireActiveFarm($user);
+        $activeFarm = $this->farmContext->requireActiveEditable($user, $this->t);
 
         if (!isset($_FILES['csv_file']) || $_FILES['csv_file']['error'] !== UPLOAD_ERR_OK) {
             flash('upload_message', 'upload_failed');
@@ -123,7 +125,7 @@ final class IngestionController
     {
         verify_csrf();
         $user = $this->auth->requireAuth();
-        $activeFarm = $this->requireActiveFarm($user);
+        $activeFarm = $this->farmContext->requireActiveEditable($user, $this->t);
 
         $cropCode = trim($_POST['crop_code'] ?? '');
         $result = $this->crops->select($activeFarm, $cropCode);

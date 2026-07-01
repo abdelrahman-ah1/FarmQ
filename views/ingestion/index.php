@@ -13,6 +13,10 @@
                 <h2><?= htmlspecialchars($t->get('ingestion.upload_title')) ?></h2>
                 <p class="muted"><?= htmlspecialchars($t->get('ingestion.upload_hint')) ?></p>
 
+                <?php if (!($canEdit ?? true)): ?>
+                <div class="alert alert-error"><?= htmlspecialchars($t->get('access.read_only')) ?></div>
+                <?php else: ?>
+
                 <p class="sample-downloads">
                     <a href="<?= asset('samples/soil_sample_template.csv') ?>" class="btn btn-secondary btn-sm" download>
                         <?= htmlspecialchars($t->get('ingestion.download_template')) ?>
@@ -55,6 +59,7 @@
                     </ul>
                 </div>
                 <?php endif; ?>
+                <?php endif; ?>
             </div>
 
             <div class="dashboard-card">
@@ -63,7 +68,7 @@
 
                 <?php if ($availableCrops === []): ?>
                 <p class="muted"><?= htmlspecialchars($t->get('ingestion.no_crops')) ?></p>
-                <?php else: ?>
+                <?php elseif ($canEdit ?? true): ?>
                 <form method="post" action="/ingestion/crop?lang=<?= $t->locale() ?>" class="form">
                     <?= csrf_field() ?>
                     <div class="form-group">

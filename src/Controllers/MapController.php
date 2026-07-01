@@ -29,10 +29,12 @@ final class MapController
         $mapData = $canAccess
             ? $this->geo->getMapData($activeFarm)
             : null;
+        $canEdit = (new \FarmQ\Services\FarmAccessService())->canEdit((int) $activeFarm['id'], (int) $user['id']);
 
         return view('map/index', app_view_data($this->t, $user, [
             'pageTitle' => $this->t->get('map.title'),
             'activeFarm' => $activeFarm,
+            'canEdit' => $canEdit,
             'tierGate' => $tierGate,
             'canAccess' => $canAccess,
             'mapData' => $mapData,
@@ -44,7 +46,7 @@ final class MapController
     {
         verify_csrf();
         $user = $this->auth->requireAuth();
-        $activeFarm = $this->requireActiveFarm($user);
+        $activeFarm = $this->farmContext->requireActiveEditable($user, $this->t);
         $tierGate = new TierGate($activeFarm);
 
         if (!$tierGate->can('satellite')) {

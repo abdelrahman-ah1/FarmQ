@@ -51,17 +51,22 @@ final class DashboardController
         $forecast = null;
         $alertList = [];
         $irrigationSchedule = null;
+        if ($activeFarm && $tierGate?->can('irrigation')) {
+            $irrigationSchedule = $this->irrigation->latest((int) $activeFarm['id']);
+        }
         if ($activeFarm && $tierGate?->can('forecast')) {
             $forecastResult = $this->weather->fetchForRegion((string) $activeFarm['region'], (int) $activeFarm['id']);
             $forecast = array_slice($forecastResult['days'] ?? [], 0, 3);
             $alertList = $this->alerts->evaluate(
                 $forecastResult['days'] ?? [],
                 $latestSample,
-                (string) ($activeFarm['selected_crop_code'] ?? '')
+                [
+                    'crop_code' => (string) ($activeFarm['selected_crop_code'] ?? ''),
+                    'region' => (string) $activeFarm['region'],
+                    'governorate' => (string) ($activeFarm['governorate'] ?? ''),
+                    'schedule' => $irrigationSchedule,
+                ]
             );
-        }
-        if ($activeFarm && $tierGate?->can('irrigation')) {
-            $irrigationSchedule = $this->irrigation->latest((int) $activeFarm['id']);
         }
 
         $onboardingSteps = $this->onboarding->steps(

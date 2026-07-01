@@ -4,6 +4,7 @@
 /database/*.sqlite
 /storage/cache/*.json
 /storage/demo_requests/
+/storage/alerts/*.json
 __pycache__/
 *.pyc
 *.log

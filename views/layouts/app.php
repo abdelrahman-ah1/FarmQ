@@ -50,11 +50,13 @@ $farms = $farms ?? [];
                 <a href="/ingestion?lang=<?= $t->locale() ?>" class="<?= ($currentPath ?? '') === '/ingestion' ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.data')) ?></a>
                 <a href="/map?lang=<?= $t->locale() ?>" class="<?= ($currentPath ?? '') === '/map' ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.map')) ?></a>
                 <a href="/irrigation?lang=<?= $t->locale() ?>" class="<?= str_starts_with($currentPath ?? '', '/irrigation') ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.irrigation')) ?></a>
+                <a href="/alerts?lang=<?= $t->locale() ?>" class="<?= str_starts_with($currentPath ?? '', '/alerts') ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.alerts')) ?></a>
                 <a href="/history?lang=<?= $t->locale() ?>" class="<?= ($currentPath ?? '') === '/history' ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.history')) ?></a>
                 <?php if (in_array($user['role'] ?? '', ['agronomist', 'admin'], true)): ?>
                 <a href="/portfolio?lang=<?= $t->locale() ?>" class="<?= str_starts_with($currentPath ?? '', '/portfolio') ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.portfolio')) ?></a>
                 <?php endif; ?>
                 <a href="/farms?lang=<?= $t->locale() ?>" class="<?= str_starts_with($currentPath ?? '', '/farms') ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.farms')) ?></a>
+                <a href="/billing?lang=<?= $t->locale() ?>" class="<?= str_starts_with($currentPath ?? '', '/billing') ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.billing')) ?></a>
                 <?php if (($user['role'] ?? '') === 'admin'): ?>
                 <a href="/settings?lang=<?= $t->locale() ?>" class="<?= ($currentPath ?? '') === '/settings' ? 'active' : '' ?>"><?= htmlspecialchars($t->get('app.nav.settings')) ?></a>
                 <?php endif; ?>
@@ -62,6 +64,9 @@ $farms = $farms ?? [];
 
             <div class="app-header-actions">
                 <span class="user-badge"><?= htmlspecialchars($user['full_name'] ?? '') ?></span>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
                 <a href="/locale/<?= $otherLocale ?>" class="lang-toggle"><?= htmlspecialchars($t->get('common.switch_lang')) ?></a>
                 <a href="/logout?lang=<?= $t->locale() ?>" class="btn btn-ghost"><?= htmlspecialchars($t->get('auth.logout')) ?></a>
             </div>
@@ -72,10 +77,13 @@ $farms = $farms ?? [];
         <?php if ($success = flash('success')): ?>
         <div class="container"><div class="alert alert-success"><?= htmlspecialchars((string) $success) ?></div></div>
         <?php endif; ?>
+        <?php if ($accessError = flash('access_error')): ?>
+        <div class="container"><div class="alert alert-error"><?= htmlspecialchars($t->get('access.' . $accessError)) ?></div></div>
+        <?php endif; ?>
         <?= $content ?? '' ?>
     </main>
     <footer style="text-align: center; padding: 2rem 0; font-size: 0.85rem; color: var(--text-muted);">
-        <p>Designed by LogiQ Studio</p>
+        <p>Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
     </footer>
     <script src="<?= asset('js/app.js') ?>" defer></script>
     <script src="<?= asset('js/connectivity.js') ?>" defer></script>

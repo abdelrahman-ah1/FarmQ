@@ -17,6 +17,9 @@ ob_start();
             <a href="#credibility"><?= htmlspecialchars($t->get('nav.credibility')) ?></a>
         </nav>
         <div class="header-actions">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                <span class="theme-icon">🌙</span>
+            </button>
             <a href="/locale/<?= $otherLocale ?>" class="lang-toggle"><?= htmlspecialchars($t->get('common.switch_lang')) ?></a>
             <a href="/login?lang=<?= $t->locale() ?>" class="btn btn-ghost"><?= htmlspecialchars($t->get('nav.login')) ?></a>
             <a href="/signup?lang=<?= $t->locale() ?>" class="btn btn-primary"><?= htmlspecialchars($t->get('nav.signup')) ?></a>
@@ -139,7 +142,7 @@ ob_start();
             <a href="/demo?lang=<?= $t->locale() ?>" class="btn btn-secondary"><?= htmlspecialchars($t->get('nav.demo')) ?></a>
         </div>
     </div>
-    <p class="footer-copy"><?= htmlspecialchars($t->get('footer.rights', ['year' => date('Y')])) ?> | Designed by LogiQ Studio</p>
+    <p class="footer-copy"><?= htmlspecialchars($t->get('footer.rights', ['year' => date('Y')])) ?> | Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
 </footer>
 <?php
 $content = ob_get_clean();

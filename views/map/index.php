@@ -12,7 +12,7 @@ ob_start();
                 <h1><?= htmlspecialchars($t->get('map.title')) ?></h1>
                 <p class="muted"><?= htmlspecialchars($t->get('map.subtitle')) ?></p>
             </div>
-            <?php if ($canAccess): ?>
+            <?php if ($canAccess && ($canEdit ?? true)): ?>
             <form method="post" action="/map/scan?lang=<?= $t->locale() ?>" data-requires-online>
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-primary" <?= $scanInProgress ? 'disabled' : '' ?>>

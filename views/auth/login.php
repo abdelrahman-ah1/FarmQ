@@ -39,7 +39,7 @@ ob_start();
             </p>
         </div>
         <div style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted);">
-            <p>Designed by LogiQ Studio</p>
+            <p>Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
         </div>
     </div>
 </section>

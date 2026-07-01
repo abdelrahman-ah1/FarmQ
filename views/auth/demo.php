@@ -38,7 +38,7 @@
         <p class="auth-footer"><a href="/?lang=<?= $t->locale() ?>"><?= htmlspecialchars($t->get('auth.demo_back')) ?></a></p>
         
         <div style="text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted);">
-            <p>Designed by LogiQ Studio</p>
+            <p>Designed by <a href="mailto:logiq.studio@gmail.com">LogiQ Studio</a></p>
         </div>
     </div>
 </section>

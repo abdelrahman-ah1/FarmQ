@@ -47,18 +47,47 @@ final class FarmAccessRepository
         }
     }
 
-    public function grant(int $farmId, int $userId): bool
+    public function grant(int $farmId, int $userId, string $role = 'viewer'): bool
     {
+        if (!in_array($role, ['viewer', 'editor', 'consultant'], true)) {
+            $role = 'viewer';
+        }
+
+        if ($this->hasAccess($farmId, $userId)) {
+            return $this->updateRole($farmId, $userId, $role);
+        }
+
         try {
             $stmt = $this->pdo->prepare(
                 'INSERT INTO farm_access (farm_id, user_id, access_role) VALUES (:farm_id, :user_id, :role)'
             );
-            $stmt->execute(['farm_id' => $farmId, 'user_id' => $userId, 'role' => 'consultant']);
+            $stmt->execute(['farm_id' => $farmId, 'user_id' => $userId, 'role' => $role]);
 
             return true;
         } catch (\PDOException) {
             return false;
         }
+    }
+
+    public function updateRole(int $farmId, int $userId, string $role): bool
+    {
+        $stmt = $this->pdo->prepare(
+            'UPDATE farm_access SET access_role = :role WHERE farm_id = :farm_id AND user_id = :user_id'
+        );
+        $stmt->execute(['role' => $role, 'farm_id' => $farmId, 'user_id' => $userId]);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function getRole(int $farmId, int $userId): ?string
+    {
+        $stmt = $this->pdo->prepare(
+            'SELECT access_role FROM farm_access WHERE farm_id = :farm_id AND user_id = :user_id LIMIT 1'
+        );
+        $stmt->execute(['farm_id' => $farmId, 'user_id' => $userId]);
+        $role = $stmt->fetchColumn();
+
+        return $role !== false ? (string) $role : null;
     }
 
     /** @return array<int, array<string, mixed>> */

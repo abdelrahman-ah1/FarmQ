@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FarmQ;
 
+use FarmQ\Controllers\AlertController;
 use FarmQ\Controllers\AuthController;
+use FarmQ\Controllers\BillingController;
 use FarmQ\Controllers\DashboardController;
 use FarmQ\Controllers\FarmController;
 use FarmQ\Controllers\LandingController;
@@ -62,6 +64,8 @@ final class App
         $ingestion = new IngestionController($this->translator);
         $blueprint = new BlueprintController($this->translator);
         $irrigation = new IrrigationController($this->translator);
+        $alerts = new AlertController($this->translator);
+        $billing = new BillingController($this->translator);
         $history = new HistoryController($this->translator);
         $portfolio = new PortfolioController($this->translator);
         $settings = new SettingsController($this->translator);
@@ -98,9 +102,22 @@ final class App
         $this->router->get('/irrigation', [$irrigation, 'index']);
         $this->router->post('/irrigation/generate', [$irrigation, 'generate']);
 
+        $this->router->get('/alerts', [$alerts, 'index']);
+
+        $this->router->get('/billing', [$billing, 'index']);
+        $this->router->post('/billing/checkout', [$billing, 'checkout']);
+        $this->router->get('/billing/callback', [$billing, 'callback']);
+        $this->router->post('/billing/webhook', [$billing, 'webhook']);
+        $this->router->get('/billing/mock', [$billing, 'mock']);
+        $this->router->post('/billing/mock/complete', [$billing, 'mockComplete']);
+
         $this->router->get('/history', [$history, 'index']);
         $this->router->get('/portfolio', [$portfolio, 'index']);
+        $this->router->get('/portfolio/accept', [$portfolio, 'accept']);
         $this->router->post('/portfolio/link', [$portfolio, 'link']);
+        $this->router->get('/portfolio/report', [$portfolio, 'report']);
+
+        $this->router->post('/farms/invite', [$farms, 'invite']);
         $this->router->get('/settings', [$settings, 'index']);
 
         $this->router->get('/locale/{locale}', [$locale, 'switch']);

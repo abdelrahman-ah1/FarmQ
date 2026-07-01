@@ -155,6 +155,7 @@
                         </li>
                         <?php endforeach; ?>
                     </ul>
+                    <a href="/alerts?lang=<?= $t->locale() ?>" class="btn btn-secondary btn-sm"><?= htmlspecialchars($t->get('dashboard.view_all_alerts')) ?></a>
                     <?php else: ?>
                     <p class="muted"><?= htmlspecialchars($t->get('dashboard.no_alerts')) ?></p>
                     <?php endif; ?>
@@ -184,6 +185,7 @@
                 <h2><?= htmlspecialchars($t->get('upgrade.title')) ?></h2>
                 <p><?= htmlspecialchars($t->get('upgrade.body')) ?></p>
                 <p class="price"><?= htmlspecialchars($t->get('plans.paid_price')) ?></p>
+                <a href="/billing?lang=<?= $t->locale() ?>" class="btn btn-primary"><?= htmlspecialchars($t->get('upgrade.cta')) ?></a>
             </div>
             <?php endif; ?>
         </div>

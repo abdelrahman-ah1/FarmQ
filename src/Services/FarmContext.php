@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FarmQ\Services;
 
+use FarmQ\Localization\Translator;
 use FarmQ\Repositories\FarmAccessRepository;
 use FarmQ\Repositories\FarmRepository;
 
@@ -54,12 +55,30 @@ final class FarmContext
         return true;
     }
 
-    public function grantConsultantAccess(int $farmId, int $consultantUserId): bool
+    public function grantConsultantAccess(int $farmId, int $consultantUserId, string $role = 'viewer'): bool
     {
         if ($this->farms->findById($farmId) === null) {
             return false;
         }
 
-        return $this->access->grant($farmId, $consultantUserId);
+        return $this->access->grant($farmId, $consultantUserId, $role);
+    }
+
+    /** @return array<string, mixed> */
+    public function requireActiveEditable(array $user, Translator $t): array
+    {
+        $farm = $this->active($user);
+        if ($farm === null) {
+            flash('errors', ['farm' => 'required']);
+            redirect('/farms/create?lang=' . $t->locale());
+        }
+
+        $access = new FarmAccessService();
+        if (!$access->canEdit((int) $farm['id'], (int) $user['id'])) {
+            flash('access_error', 'read_only');
+            redirect('/dashboard?lang=' . $t->locale());
+        }
+
+        return $farm;
     }
 }

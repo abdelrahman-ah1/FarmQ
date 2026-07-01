@@ -1,6 +1,28 @@
 (function () {
     'use strict';
 
+    // Theme Toggle Logic
+    var themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        // Set initial icon
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        var icon = themeToggleBtn.querySelector('.theme-icon');
+        if (icon) {
+            icon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            var theme = document.documentElement.getAttribute('data-theme');
+            var newTheme = theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            if (icon) {
+                icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            }
+        });
+    }
+
     document.querySelectorAll('[data-nav-toggle]').forEach(function (btn) {
         var targetId = btn.getAttribute('aria-controls');
         var target = targetId ? document.getElementById(targetId) : null;

@@ -125,4 +125,14 @@ final class FarmRepository
         );
         $stmt->execute(['crop_code' => $cropCode, 'id' => $farmId]);
     }
+
+    public function activateTier(int $farmId, string $expiresAt): bool
+    {
+        $stmt = $this->pdo->prepare(
+            "UPDATE farms SET tier = 'paid', tier_expires_at = :expires WHERE id = :id"
+        );
+        $stmt->execute(['expires' => $expiresAt, 'id' => $farmId]);
+
+        return $stmt->rowCount() > 0;
+    }
 }

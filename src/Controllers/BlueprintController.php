@@ -28,10 +28,12 @@ final class BlueprintController
         $readiness = $this->blueprints->readiness($activeFarm);
         $planRow = $this->blueprints->latestPlan((int) $activeFarm['id']);
         $isStale = $this->blueprints->isStale($activeFarm, $planRow);
+        $canEdit = (new \FarmQ\Services\FarmAccessService())->canEdit((int) $activeFarm['id'], (int) $user['id']);
 
         return view('blueprint/index', app_view_data($this->t, $user, [
             'pageTitle' => $this->t->get('blueprint.title'),
             'activeFarm' => $activeFarm,
+            'canEdit' => $canEdit,
             'readiness' => $readiness,
             'planRow' => $planRow,
             'isStale' => $isStale,
@@ -43,7 +45,7 @@ final class BlueprintController
     {
         verify_csrf();
         $user = $this->auth->requireAuth();
-        $activeFarm = $this->requireActiveFarm($user);
+        $activeFarm = $this->farmContext->requireActiveEditable($user, $this->t);
 
         $result = $this->blueprints->generateForFarm($activeFarm, $this->t->locale());
         if (!$result['ok']) {
