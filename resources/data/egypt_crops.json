@@ -1,0 +1,17 @@
+{
+  "crops": [
+    {"code": "cotton", "regions": ["delta"], "season": "summer"},
+    {"code": "wheat", "regions": ["delta", "upper_egypt"], "season": "winter"},
+    {"code": "rice", "regions": ["delta"], "season": "summer"},
+    {"code": "maize", "regions": ["delta", "upper_egypt"], "season": "summer"},
+    {"code": "sugarcane", "regions": ["upper_egypt"], "season": "year_round"},
+    {"code": "citrus", "regions": ["reclaimed_desert"], "season": "year_round"},
+    {"code": "grapes", "regions": ["reclaimed_desert"], "season": "summer"},
+    {"code": "strawberries", "regions": ["reclaimed_desert"], "season": "winter"}
+  ],
+  "regions": {
+    "delta": {"name_en": "Nile Delta", "name_ar": "دلتا النيل"},
+    "upper_egypt": {"name_en": "Upper Egypt", "name_ar": "صعيد مصر"},
+    "reclaimed_desert": {"name_en": "Reclaimed Desert", "name_ar": "الواحات والأراضي الصحراوية الجديدة"}
+  }
+}

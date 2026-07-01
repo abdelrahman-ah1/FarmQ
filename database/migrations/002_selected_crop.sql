@@ -1,0 +1,3 @@
+-- Migration: add selected_crop_code to farms (Phase 2)
+-- Run manually if upgrading an existing MySQL database:
+-- ALTER TABLE farms ADD COLUMN selected_crop_code VARCHAR(64) NULL;

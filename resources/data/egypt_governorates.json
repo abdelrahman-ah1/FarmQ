@@ -1,0 +1,5 @@
+{
+  "delta": ["gharbia", "kafr_el_sheikh", "dakahlia", "sharqia", "beheira", "monufia"],
+  "upper_egypt": ["luxor", "aswan", "qena", "sohag", "minya", "asyut"],
+  "reclaimed_desert": ["new_valley", "matrouh", "east_owainat", "south_sinai"]
+}

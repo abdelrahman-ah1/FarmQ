@@ -1,0 +1,9 @@
+.env
+/vendor/
+/node_modules/
+/database/*.sqlite
+/storage/cache/*.json
+/storage/demo_requests/
+*.log
+.DS_Store
+Thumbs.db

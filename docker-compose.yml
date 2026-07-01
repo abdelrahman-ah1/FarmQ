@@ -1,0 +1,72 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: farmq
+      DB_USER: farmq
+      DB_PASS: farmq_secret
+      REDIS_HOST: redis
+      APP_ENV: local
+      APP_URL: http://localhost:8081
+      DEV_UNLOCK_PAID: "1"
+      GEOSPATIAL_STAC_URL: https://earth-search.aws.element84.com/v1
+      GEOSPATIAL_MAX_CLOUD_PCT: "35"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    volumes:
+      - ./worker:/app
+    environment:
+      REDIS_HOST: redis
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: farmq
+      DB_USER: farmq
+      DB_PASS: farmq_secret
+      GEOSPATIAL_STAC_URL: https://earth-search.aws.element84.com/v1
+      GEOSPATIAL_USE_RASTER: "1"
+      GEOSPATIAL_MAX_CLOUD_PCT: "35"
+    depends_on:
+      - redis
+      - db
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: farmq
+      MYSQL_USER: farmq
+      MYSQL_PASSWORD: farmq_secret
+      MYSQL_ROOT_PASSWORD: root_secret
+    volumes:
+      - farmq_db:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  farmq_db:
