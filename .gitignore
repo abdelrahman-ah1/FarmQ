@@ -4,6 +4,8 @@
 /database/*.sqlite
 /storage/cache/*.json
 /storage/demo_requests/
+__pycache__/
+*.pyc
 *.log
 .DS_Store
 Thumbs.db
